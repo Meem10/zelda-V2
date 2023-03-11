@@ -1,0 +1,629 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B8B2974761400F6B9A0 /* Messages.swift */; };
+		3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B8E2974767000F6B9A0 /* Cell.swift */; };
+		3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B90297476A600F6B9A0 /* Title.swift */; };
+		3F0D6B9429747AC400F6B9A0 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9329747AC400F6B9A0 /* Login.swift */; };
+		3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9529747B1400F6B9A0 /* SingUp.swift */; };
+		3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9729747DF500F6B9A0 /* Users.swift */; };
+		3F0D6B9A29749CEC00F6B9A0 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */; };
+		3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */; };
+		3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B92972E55D002E0BB1 /* ContentView.swift */; };
+		3F3A76BC2972E55E002E0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */; };
+		3F3A76BF2972E55E002E0BB1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */; };
+		3F3A76D22972E90C002E0BB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76D12972E90C002E0BB1 /* FirebaseAuth */; };
+		3F3A76D42972E90C002E0BB1 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76D32972E90C002E0BB1 /* FirebaseDatabase */; };
+		3F3A76D62972E90C002E0BB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76D52972E90C002E0BB1 /* FirebaseFirestore */; };
+		3F3A76D82972E90C002E0BB1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76D72972E90C002E0BB1 /* FirebaseStorage */; };
+		3F3A76DB2972EAE8002E0BB1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76DA2972EAE8002E0BB1 /* GoogleSignIn */; };
+		3F3A76DD2972EAE8002E0BB1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76DC2972EAE8002E0BB1 /* GoogleSignInSwift */; };
+		3F3A76E02972EB89002E0BB1 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76DF2972EB89002E0BB1 /* FacebookCore */; };
+		3F3A76E22972EB89002E0BB1 /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E12972EB89002E0BB1 /* FacebookGamingServices */; };
+		3F3A76E42972EB89002E0BB1 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E32972EB89002E0BB1 /* FacebookLogin */; };
+		3F3A76E62972EB89002E0BB1 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E52972EB89002E0BB1 /* FacebookShare */; };
+		3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EC29730047002E0BB1 /* FrindsView.swift */; };
+		3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EE29730054002E0BB1 /* ChatsView.swift */; };
+		3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE963EA2974570A00E3E1CD /* login&signupView.swift */; };
+		848A33A12975B8A6008D9957 /* snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33A02975B8A6008D9957 /* snake.swift */; };
+		848A33AB2976120A008D9957 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AA2976120A008D9957 /* Memory.swift */; };
+		848A33AD2976123D008D9957 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AC2976123D008D9957 /* CardView.swift */; };
+		848A33AF2976128B008D9957 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AE2976128B008D9957 /* MemoryGameView.swift */; };
+		AF0DCE282973271B00186556 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE272973271B00186556 /* HomeView.swift */; };
+		AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE292973272F00186556 /* StoreView.swift */; };
+		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
+		AF3C0CC4297736C800E742CF /* XO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C0CC3297736C800E742CF /* XO.swift */; };
+		AF80AC9229783F3E00F7279B /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC9129783F3E00F7279B /* FacebookLogin.swift */; };
+		AF80AC962978874800F7279B /* HomeGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC952978874800F7279B /* HomeGames.swift */; };
+		AF80AC9829789CE400F7279B /* Wordle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC9729789CE400F7279B /* Wordle.swift */; };
+		E44717F02973F29F00EA5834 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44717EF2973F29F00EA5834 /* AccountView.swift */; };
+		E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */; };
+		E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */; };
+		E4DCF51229767DA500FF02C8 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F0D6B8B2974761400F6B9A0 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		3F0D6B8E2974767000F6B9A0 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		3F0D6B90297476A600F6B9A0 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		3F0D6B9329747AC400F6B9A0 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		3F0D6B9529747B1400F6B9A0 /* SingUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUp.swift; sourceTree = "<group>"; };
+		3F0D6B9729747DF500F6B9A0 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
+		3F3A76B42972E55D002E0BB1 /* zelda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zelda.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zeldaApp.swift; sourceTree = "<group>"; };
+		3F3A76B92972E55D002E0BB1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3F3A76EC29730047002E0BB1 /* FrindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrindsView.swift; sourceTree = "<group>"; };
+		3F3A76EE29730054002E0BB1 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		3F854BEB2975BCCF00AEF852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FE963EA2974570A00E3E1CD /* login&signupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "login&signupView.swift"; sourceTree = "<group>"; };
+		848A33A02975B8A6008D9957 /* snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = snake.swift; sourceTree = "<group>"; };
+		848A33AA2976120A008D9957 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		848A33AC2976123D008D9957 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		848A33AE2976128B008D9957 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
+		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = zelda/View/Home/HomeView.swift; sourceTree = SOURCE_ROOT; };
+		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF3C0CC3297736C800E742CF /* XO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XO.swift; sourceTree = "<group>"; };
+		AF80AC9129783F3E00F7279B /* FacebookLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
+		AF80AC952978874800F7279B /* HomeGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGames.swift; sourceTree = "<group>"; };
+		AF80AC9729789CE400F7279B /* Wordle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordle.swift; sourceTree = "<group>"; };
+		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleView.swift; sourceTree = "<group>"; };
+		E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleModel.swift; sourceTree = "<group>"; };
+		E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F3A76B12972E55D002E0BB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F3A76DB2972EAE8002E0BB1 /* GoogleSignIn in Frameworks */,
+				3F3A76D42972E90C002E0BB1 /* FirebaseDatabase in Frameworks */,
+				3F3A76E02972EB89002E0BB1 /* FacebookCore in Frameworks */,
+				3F3A76D82972E90C002E0BB1 /* FirebaseStorage in Frameworks */,
+				3F3A76DD2972EAE8002E0BB1 /* GoogleSignInSwift in Frameworks */,
+				3F3A76E42972EB89002E0BB1 /* FacebookLogin in Frameworks */,
+				3F3A76D22972E90C002E0BB1 /* FirebaseAuth in Frameworks */,
+				3F3A76D62972E90C002E0BB1 /* FirebaseFirestore in Frameworks */,
+				3F3A76E62972EB89002E0BB1 /* FacebookShare in Frameworks */,
+				3F3A76E22972EB89002E0BB1 /* FacebookGamingServices in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F0D6B8D2974765E00F6B9A0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				3F3A76EE29730054002E0BB1 /* ChatsView.swift */,
+				3F0D6B90297476A600F6B9A0 /* Title.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */ = {
+			isa = PBXGroup;
+			children = (
+				3FE963EA2974570A00E3E1CD /* login&signupView.swift */,
+				3F0D6B9329747AC400F6B9A0 /* Login.swift */,
+				AF80AC9129783F3E00F7279B /* FacebookLogin.swift */,
+				3F0D6B9529747B1400F6B9A0 /* SingUp.swift */,
+				3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */,
+			);
+			path = "Login and SingUp View";
+			sourceTree = "<group>";
+		};
+		3F3A76AB2972E55D002E0BB1 = {
+			isa = PBXGroup;
+			children = (
+				3F3A76B62972E55D002E0BB1 /* zelda */,
+				3F3A76B52972E55D002E0BB1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F3A76B52972E55D002E0BB1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F3A76B42972E55D002E0BB1 /* zelda.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F3A76B62972E55D002E0BB1 /* zelda */ = {
+			isa = PBXGroup;
+			children = (
+				3F854BEB2975BCCF00AEF852 /* Info.plist */,
+				3F3A76EA29730021002E0BB1 /* Data */,
+				3F3A76E929730011002E0BB1 /* View */,
+				3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */,
+				AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */,
+				3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */,
+				3F3A76BD2972E55E002E0BB1 /* Preview Content */,
+			);
+			path = zelda;
+			sourceTree = "<group>";
+		};
+		3F3A76BD2972E55E002E0BB1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3F3A76E929730011002E0BB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF80AC9729789CE400F7279B /* Wordle.swift */,
+				E4DCF50E29767D4900FF02C8 /* PuzzleGame */,
+				848A33A9297611D3008D9957 /* Matched Cards Game */,
+				3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */,
+				3F3A76EB2973002E002E0BB1 /* FrindsView */,
+				AFC2DDCB2976A90900C2073C /* Home */,
+				AF0DCE292973272F00186556 /* StoreView.swift */,
+				E44717EF2973F29F00EA5834 /* AccountView.swift */,
+				AF3C0CC3297736C800E742CF /* XO.swift */,
+				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
+				848A33A02975B8A6008D9957 /* snake.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F3A76EA29730021002E0BB1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F0D6B8B2974761400F6B9A0 /* Messages.swift */,
+				3F0D6B9729747DF500F6B9A0 /* Users.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3F3A76EB2973002E002E0BB1 /* FrindsView */ = {
+			isa = PBXGroup;
+			children = (
+				3F0D6B8D2974765E00F6B9A0 /* Chat */,
+				3F3A76EC29730047002E0BB1 /* FrindsView.swift */,
+				3F0D6B8E2974767000F6B9A0 /* Cell.swift */,
+			);
+			path = FrindsView;
+			sourceTree = "<group>";
+		};
+		848A33A9297611D3008D9957 /* Matched Cards Game */ = {
+			isa = PBXGroup;
+			children = (
+				848A33AA2976120A008D9957 /* Memory.swift */,
+				848A33AC2976123D008D9957 /* CardView.swift */,
+				848A33AE2976128B008D9957 /* MemoryGameView.swift */,
+			);
+			path = "Matched Cards Game";
+			sourceTree = "<group>";
+		};
+		AFC2DDCB2976A90900C2073C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AF0DCE272973271B00186556 /* HomeView.swift */,
+				AF80AC952978874800F7279B /* HomeGames.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E4DCF50E29767D4900FF02C8 /* PuzzleGame */ = {
+			isa = PBXGroup;
+			children = (
+				E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */,
+				E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */,
+				E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */,
+			);
+			name = PuzzleGame;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F3A76B32972E55D002E0BB1 /* zelda */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F3A76C22972E55E002E0BB1 /* Build configuration list for PBXNativeTarget "zelda" */;
+			buildPhases = (
+				3F3A76B02972E55D002E0BB1 /* Sources */,
+				3F3A76B12972E55D002E0BB1 /* Frameworks */,
+				3F3A76B22972E55D002E0BB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = zelda;
+			packageProductDependencies = (
+				3F3A76D12972E90C002E0BB1 /* FirebaseAuth */,
+				3F3A76D32972E90C002E0BB1 /* FirebaseDatabase */,
+				3F3A76D52972E90C002E0BB1 /* FirebaseFirestore */,
+				3F3A76D72972E90C002E0BB1 /* FirebaseStorage */,
+				3F3A76DA2972EAE8002E0BB1 /* GoogleSignIn */,
+				3F3A76DC2972EAE8002E0BB1 /* GoogleSignInSwift */,
+				3F3A76DF2972EB89002E0BB1 /* FacebookCore */,
+				3F3A76E12972EB89002E0BB1 /* FacebookGamingServices */,
+				3F3A76E32972EB89002E0BB1 /* FacebookLogin */,
+				3F3A76E52972EB89002E0BB1 /* FacebookShare */,
+			);
+			productName = zelda;
+			productReference = 3F3A76B42972E55D002E0BB1 /* zelda.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F3A76AC2972E55D002E0BB1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					3F3A76B32972E55D002E0BB1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 3F3A76AF2972E55D002E0BB1 /* Build configuration list for PBXProject "zelda" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F3A76AB2972E55D002E0BB1;
+			packageReferences = (
+				3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3F3A76D92972EAE8002E0BB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
+			productRefGroup = 3F3A76B52972E55D002E0BB1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F3A76B32972E55D002E0BB1 /* zelda */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F3A76B22972E55D002E0BB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F3A76BF2972E55E002E0BB1 /* Preview Assets.xcassets in Resources */,
+				AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */,
+				3F3A76BC2972E55E002E0BB1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F3A76B02972E55D002E0BB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */,
+				AF80AC9229783F3E00F7279B /* FacebookLogin.swift in Sources */,
+				3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */,
+				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
+				3F0D6B9429747AC400F6B9A0 /* Login.swift in Sources */,
+				AF80AC962978874800F7279B /* HomeGames.swift in Sources */,
+				E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */,
+				3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */,
+				3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */,
+				3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */,
+				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
+				E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */,
+				AF80AC9829789CE400F7279B /* Wordle.swift in Sources */,
+				848A33AB2976120A008D9957 /* Memory.swift in Sources */,
+				848A33A12975B8A6008D9957 /* snake.swift in Sources */,
+				AF3C0CC4297736C800E742CF /* XO.swift in Sources */,
+				848A33AD2976123D008D9957 /* CardView.swift in Sources */,
+				848A33AF2976128B008D9957 /* MemoryGameView.swift in Sources */,
+				AF0DCE282973271B00186556 /* HomeView.swift in Sources */,
+				E44717F02973F29F00EA5834 /* AccountView.swift in Sources */,
+				3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */,
+				3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */,
+				E4DCF51229767DA500FF02C8 /* PuzzleViewModel.swift in Sources */,
+				AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */,
+				3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */,
+				3F0D6B9A29749CEC00F6B9A0 /* ForgotPassword.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3F3A76C02972E55E002E0BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F3A76C12972E55E002E0BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F3A76C32972E55E002E0BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"zelda/Preview Content\"";
+				DEVELOPMENT_TEAM = A84FHT6CG5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = zelda/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Aamer-Essa.zelda";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F3A76C42972E55E002E0BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"zelda/Preview Content\"";
+				DEVELOPMENT_TEAM = A84FHT6CG5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = zelda/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Aamer-Essa.zelda";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F3A76AF2972E55D002E0BB1 /* Build configuration list for PBXProject "zelda" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F3A76C02972E55E002E0BB1 /* Debug */,
+				3F3A76C12972E55E002E0BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F3A76C22972E55E002E0BB1 /* Build configuration list for PBXNativeTarget "zelda" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F3A76C32972E55E002E0BB1 /* Debug */,
+				3F3A76C42972E55E002E0BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		3F3A76D92972EAE8002E0BB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F3A76D12972E90C002E0BB1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		3F3A76D32972E90C002E0BB1 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		3F3A76D52972E90C002E0BB1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		3F3A76D72972E90C002E0BB1 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D02972E90C002E0BB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		3F3A76DA2972EAE8002E0BB1 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D92972EAE8002E0BB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		3F3A76DC2972EAE8002E0BB1 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76D92972EAE8002E0BB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		3F3A76DF2972EB89002E0BB1 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		3F3A76E12972EB89002E0BB1 /* FacebookGamingServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookGamingServices;
+		};
+		3F3A76E32972EB89002E0BB1 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		3F3A76E52972EB89002E0BB1 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3A76DE2972EB89002E0BB1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3F3A76AC2972E55D002E0BB1 /* Project object */;
+}
