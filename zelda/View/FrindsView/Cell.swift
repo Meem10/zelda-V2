@@ -41,8 +41,8 @@ struct Cell: View {
             
             Image("\(user.profileImage)")
                 .resizable()
-                .frame(width: 70,height: 70)
-                .clipShape(Circle())
+                .frame(width: 40,height: 60)
+//                .clipShape(Circle())
             
             ZStack{
                 HStack(){
