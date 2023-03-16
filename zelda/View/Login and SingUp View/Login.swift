@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
+
 struct Login : View {
     
     //MARK: STATES
@@ -23,11 +24,8 @@ struct Login : View {
     var body: some View{
         
         ZStack(alignment: .bottom) {
-            
             VStack{
-                
                 HStack{
-//                    Spacer(minLength: 0)
                     VStack(spacing: 10){
                         
                         Text("Login")
@@ -38,15 +36,12 @@ struct Login : View {
                             .fill(self.index == 0 ? Color.blue : Color.clear)
                             .frame(width: 100, height: 5)
                         Spacer()
-                        
                     }
-                    
                     Spacer(minLength: 0)
                 }
                 .padding(.top, 30)
                 
                 VStack{
-                    
                     HStack(spacing: 15){
                         
                         Image(systemName: "envelope.fill")
@@ -100,9 +95,7 @@ struct Login : View {
             .contentShape(CShapeLogin())
             .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: -5)
             .onTapGesture {
-                
                 self.index = 0
-                
             }
             .cornerRadius(35)
             .padding(.horizontal,20)
@@ -126,7 +119,7 @@ struct Login : View {
         }
         .alert(isPresented: $showErrorMessage){
             Alert(title:
-                    Text("⚠ Error")
+                    Text("⚠️ Error")
                         .foregroundColor(Color.red)
                         .font(.system(.largeTitle)),
                   message: Text("\(errorMessage)"),
@@ -141,7 +134,7 @@ struct Login : View {
         if email == "" || password == "" {
             
             showErrorMessage = true
-            errorMessage = "Please fill all the contents "
+            errorMessage = "Please fill in all the fileds"
             
         } else {
             

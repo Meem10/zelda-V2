@@ -12,7 +12,7 @@ struct FrindsView: View {
     @ObservedObject var usersManger = Users()
     @State var showChatView = false
     @Environment(\.presentationMode) var present
-  
+   
     var body: some View {
         NavigationView {
            
