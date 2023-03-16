@@ -17,7 +17,6 @@ struct SignUP : View {
     @State var fullName = ""
     @State var email = ""
     @State var passsword = ""
-    @State var rePassword = ""
     @State var showErrorMessage = false
     @State  var errorMessage = String()
     
@@ -80,22 +79,6 @@ struct SignUP : View {
                 .padding(.horizontal)
                 .padding(.top, 40)
                 
-//                VStack{
-//                    
-//                    HStack(spacing: 15){
-//                        
-//                        Image(systemName: "eye.slash.fill")
-//                            .foregroundColor(Color("Color4"))
-//                        
-//                        SecureField("Password", text: self.$passsword)
-//                    }
-//                    
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 30)
-                
-                
                 
                 VStack{
                     
@@ -104,7 +87,7 @@ struct SignUP : View {
                         Image(systemName: "eye.slash.fill")
                             .foregroundColor(Color("Color4"))
                         
-                        SecureField("Password", text: self.$rePassword)
+                        SecureField("Password", text: self.$passsword)
                     }
                     
                     Divider().background(Color.white.opacity(0.5))
@@ -127,10 +110,9 @@ struct SignUP : View {
             .cornerRadius(35)
             .padding(.horizontal,20)
             
-            // Button
             
             Button(action: {
-                singup(name: self.fullName, email: self.email, password: self.passsword,rePassword: self.rePassword)
+                singup(name: self.fullName, email: self.email, password: self.passsword)
             }) {
                 
                 Text("SIGNUP")
@@ -143,30 +125,25 @@ struct SignUP : View {
                     .shadow(color: Color.white.opacity(0.1), radius: 5, x: 0, y: 5)
             }
             .offset(y: 25)
-            
             .opacity(self.index == 1 ? 1 : 0)
         }
         .alert(isPresented: $showErrorMessage) {
             Alert(title:
-                    Text("⚠ Error")
+                    Text("⚠️Error")
                         .foregroundColor(Color.red)
                         .font(.system(.largeTitle)),
                   message: Text("\(errorMessage)"),
                   dismissButton: .default(Text("Ok")))
                 }
-
     }
     
-    func singup(name:String,email:String,password:String,rePassword:String){
+    func singup(name:String,email:String,password:String){
          
-        if email == "" || password == "" || name == "" || rePassword == "" {
+        if email == "" || password == "" || name == "" {
             
             showErrorMessage = true
-            errorMessage = "Please fill all the contents "
+            errorMessage = "Please fill in all the fileds"
             
-        } else if password != rePassword {
-            showErrorMessage = true
-            errorMessage = "password not match"
         }
         else {
             
@@ -177,23 +154,19 @@ struct SignUP : View {
                 
                 showErrorMessage = true
                 errorMessage = "\(err!.localizedDescription)"
-               
-                
             } else {
                 
                 let dbRef: DatabaseReference!
-                dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
-                dbRef.setValue(["fullName":name,"email":email,"password":password,"profileImage":"1","jewelry":100])
+                    dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
+                    dbRef.setValue(["fullName":name,"email":email,"password":password,"profileImage":"1","jewelry":100])
                 
                 guard let userID = authrize?.user.uid else { return }
                 DBModel.curentUserID = userID
                 
-            }
+                }
             }
         }
-        
     }
-    
 }
 
 

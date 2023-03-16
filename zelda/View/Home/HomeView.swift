@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    //MARK:  States
     @State var userJewerly = 0
+    @State var userName = ""
+
     var body: some View {
-        Home(userJewerly: $userJewerly ).onAppear(){
+        Home(userJewerly: $userJewerly,userName: $userName )
+            .onAppear(){
             fetchJewerly()
         }
     }
@@ -18,35 +22,42 @@ struct HomeView: View {
     func fetchJewerly(){
         DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user in
             userJewerly = user.jewelry
+            userName = user.name
+            
         }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-      }
-    }
 
 struct Home: View {
+    
+    //MARK:  Bindings
     @Binding var userJewerly: Int
-
+    @Binding var userName:String
+    //MARK:  States
+    @State var isSelectFrinsBtn = false
+    @State var isSelectShopBtn = false
+    @State var isSelctAccountView = false
+    
     var body: some View {
-        NavigationView {
+   
             GeometryReader { geometry in
                 ZStack {
                     Image("background")
                         .resizable()
                         .aspectRatio(geometry.size, contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
+                    
+                    //MARK:  Home Header
                     VStack {
                         HStack {
-                            Text("Let's play!")
+                            Text("Hi \(userName), Let's play!")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
                             Spacer()
+                            
                             HStack{
                                 Button(action : {
                                     
@@ -66,49 +77,52 @@ struct Home: View {
                             .padding(.trailing)
                             .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
                             .cornerRadius(10)
-                        } // head view
+                        }
                         .padding(.horizontal)
                         .padding(.top)
                         
-                        // for side bar and the details
+                        //MARK:  Games
+                       
                         ScrollView(.vertical, showsIndicators: false){
-                            VStack(spacing: 20){
-                                XO()
-                                ThePuzzle()
-                                Snake()
-                                UniverseMemory()
-                                Ludo()
-                                chess()
-                                    .padding(.bottom, -50)
+                            ForEach(gameList) { list in
+                                VStack(spacing: 20){
+                                    GameLabel(gameName: list.gameName, gameImage: list.gameImage)
+                                }
                             }
+                           
                         }
-                        .padding(.bottom, -400)
+                    }
+                }
+                .overlay(
+                    //MARK:  Tab Bar
+                    HStack {
+                        Button( action: {
+                                isSelectFrinsBtn.toggle()
+                            }, label : {
+                                    ButtonTabBar(image: Image(systemName: "person.3.fill"))
+                                    }
+                                ).fullScreenCover(isPresented: $isSelectFrinsBtn) {
+                                FrindsView()
+                            }
                         
-                        HStack {
-                            // for tab bar
-                            NavigationLink (
-                                destination :
-                                    FrindsView()
-                                , label : {
-                                    ButtonTabBar(image: Image(systemName: "person.3.sequence.fill")) {}
-                                }
-                            )
-                            NavigationLink (
-                                destination :
-                                    StoreView().navigationBarBackButtonHidden(true)
-                                , label : {
-                                    ButtonTabBar(image: Image("shop")) {}
-                                }
-                            )
-                            NavigationLink (
-                                destination :
-                                    AccountView().navigationBarBackButtonHidden(true)
-                                , label : {
-                                    ButtonTabBar(image: Image(systemName: "person.crop.circle")) {}
-                                }
-                            )
+                        Button(action: {
+                                isSelectShopBtn.toggle()
+                            }, label : {
+                                ButtonTabBar(image: Image("shop"))
+                            }
+                            ).fullScreenCover(isPresented: $isSelectShopBtn) {
+                                StoreView()
+                            }
                             
-                        } // tab bar
+                        Button(action: {
+                                isSelctAccountView.toggle()
+                            }, label: {
+                                ButtonTabBar(image: Image(systemName: "person.crop.circle"))
+                            }
+                        ).fullScreenCover(isPresented: $isSelctAccountView) {
+                                AccountView()
+                            }
+                    } // tab bar
                         .padding()
                         .background(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                         .clipShape(Capsule())
@@ -116,26 +130,31 @@ struct Home: View {
                         .padding(.horizontal)
                         .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
                         .frame(maxHeight: .infinity, alignment: .bottom)
-                    }
-                }
+                    ,alignment: .bottom
+                )
             }
-        }
-        .navigationBarBackButtonHidden(true)
     }
 }
 
 
 struct ButtonTabBar: View {
     let image : Image
-    let action : () -> Void
     var body: some View {
         HStack{
             image
                 .resizable()
-                .frame(width: 27, height: 23)
+                .frame(width: 25, height: 25)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
         }
     }
 }
 
+let gameList = [Game(id: 0, gameName: "Tic Tac Toe", gameImage: "XO"),Game(id: 1, gameName: "Puzzle", gameImage: "puzzle"),Game(id: 2, gameName: "Snake", gameImage: "snake"),Game(id: 3, gameName: "Universe Memory", gameImage: "universe"),Game(id: 4, gameName: "Ludo Star", gameImage: "ludo"),Game(id: 5, gameName: "Chess", gameImage: "chess")]
+
+struct Game:Identifiable {
+    var id: Int
+    let gameName :String
+    let gameImage:String
+  
+}

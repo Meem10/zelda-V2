@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 import GoogleSignInSwift
-import FBSDKLoginKit
+
 
 struct Login_signupView: View {
     var body: some View {
@@ -31,7 +31,6 @@ struct login_signupView_Previews: PreviewProvider {
 struct Login_signupHomeView : View {
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
-    @State var manager = LoginManager()
     @State var index = 0
     
     var body: some View{
@@ -41,8 +40,6 @@ struct Login_signupHomeView : View {
             GeometryReader{_ in
                 
                 VStack{
-                    
-                    
                     ZStack{
                         SignUP(index: self.$index)
                             .zIndex(Double(self.index))
@@ -70,40 +67,6 @@ struct Login_signupHomeView : View {
                     
                     
                     HStack(spacing: 30){
-                        
-//                        Button(action: {
-//                            if logged {
-//                                manager.logOut()
-//                                email = ""
-//                                logged = false
-//                            }else {
-//                                manager.logIn(permissions: ["public_profile","email"], from: nil) { error , result in
-//                                    if error != nil {
-//                                        print(error)
-//                                        return
-//                                    }
-//                                    // logged success
-//                                    logged = true
-//                                    // getting user details using facebook graph request
-//                                    let request = GraphRequest(graphPath: "me", parameters : ["fields": "email"])
-//                                    request.start{ ( _, res, _) in
-//                                        guard let profileData = res as? [String : Any ] else { return }
-//
-//                                        //saving email
-//                                        email = profileData["email"] as! String
-//                                    }
-//                                }
-//                            }
-//
-//                        }) {
-//
-//                            Image("fb")
-//                                .resizable()
-//                                .renderingMode(.original)
-//                                .frame(width: 50, height: 50)
-//                                .clipShape(Circle())
-//                        }
-//                        .offset(y:-150)
                         
                         Button(action: {
                             loginUsingGoogle()
@@ -136,12 +99,10 @@ struct Login_signupHomeView : View {
                   // Create Google Sign In configuration object.
                   let config = GIDConfiguration(clientID: clientID)
 
-                  GIDSignIn.sharedInstance.configuration = config
-           
-           GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult , err in
+            GIDSignIn.sharedInstance.configuration = config
+            GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult , err in
                       
                       if err != nil {
-                
                          print("\(err!.localizedDescription)")
                           
                       } else {
@@ -157,19 +118,16 @@ struct Login_signupHomeView : View {
             // set the data from the google
         
             let userName = "\(signInResult.profile!.givenName!) \(signInResult.profile!.familyName!)"
-        
             let userEmail = "\(signInResult.profile!.email)"
             let userPassword = ""
-            
-        
-        guard let idToken = signInResult.idToken else { return }
     
-        let accessToken = signInResult.accessToken
+            guard let idToken = signInResult.idToken else { return }
+    
+            let accessToken = signInResult.accessToken
         
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
         
         // login
-        
         Auth.auth().signIn(with: credential) { authResult, error in
                
             if error != nil {
@@ -180,13 +138,11 @@ struct Login_signupHomeView : View {
                     
                     var dbRef : DatabaseReference!
                         dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
-                dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage,"jewelry":user.jewelry])
+                        dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage,"jewelry":user.jewelry])
                 
                     }
                 }//end Auth
-            
             }// send sendData
-    
 } // Login_signupHomeView()
 
 
@@ -220,52 +176,4 @@ struct CShapeSingUp : Shape {
         }
     }
 }
-
-
-
-//var images : [UIImage]! = [
-//    UIImage(named: "image0")!,
-//    UIImage(named: "image1")!,
-//    UIImage(named: "image2")!,
-//    UIImage(named: "image3")!,
-//    UIImage(named: "image4")!,
-//    UIImage(named: "image5")!,
-//    UIImage(named: "image6")!,
-//    UIImage(named: "image7")!,
-//    UIImage(named: "image8")!,
-//    UIImage(named: "image9")!,
-//    UIImage(named: "image10")!,
-//    UIImage(named: "image11")!,
-//    UIImage(named: "image12")!,
-//    UIImage(named: "image13")!,
-//    UIImage(named: "image14")!
-//
-//]
-//
-//let animatedImages = UIImage.animatedImage(with: images, duration: 0.8)
-//
-//
-//struct animationSequence : UIViewRepresentable{
-//
-//
-//    func makeUIView(context: Context) -> UIView {
-//
-//        let seqAnimview = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-//        let seqImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 400, height: 190))
-//        seqImage.clipsToBounds = true
-//        seqImage.layer.cornerRadius = 20
-//        seqImage.autoresizesSubviews = true
-//        seqImage.contentMode = UIView.ContentMode.scaleAspectFit
-//        seqImage.image = animatedImages
-//        seqAnimview.addSubview(seqImage)
-//        return seqAnimview
-//
-//
-//    }
-//
-//    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<animationSequence>) {
-//
-//    }
-//
-//}
-
+   

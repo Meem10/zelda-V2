@@ -15,6 +15,7 @@ struct XOgame: View {
 struct XOButton : View {
     @Binding var letter : String
     @State private var degree = 0.0
+   
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -50,6 +51,7 @@ struct Moves : View {
     @State var moves = ["","","","","","","","",""]
     @State var endGame = "Tic Tac Toe"
     @State var gameEnded = false
+    @Environment(\.presentationMode) var present
     var ranges = [(0..<3),(3..<6),(6..<9)]
     var body: some View {
         NavigationView{
@@ -78,7 +80,7 @@ struct Moves : View {
 //                        .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
 //                        .cornerRadius(10)
 //                        .padding(.leading, 270)
-                        Text("")
+                        
                             /*.alert(endGame, isPresented: $gameEnded){
                                 Button( "Reset", role: .destructive, action: resetGame)
                             }*/
@@ -88,12 +90,11 @@ struct Moves : View {
                             .foregroundColor(.white)
                             .font(.largeTitle.monospaced().bold())
                         Spacer()
-                        //                        .padding(.top)
+                        
                         ForEach(ranges, id: \.self) { range in
                             HStack{
                                 ForEach(range, id: \.self) { i in
                                     XOButton(letter: $moves[i])
-                                    //                                    .frame(width: 120,height: 320)
                                         .simultaneousGesture(TapGesture()
                                             .onEnded { _ in
                                                 PlayerTap(index:i)
@@ -101,7 +102,6 @@ struct Moves : View {
                                 }
                             }
                         }
-                        //                    .padding(.top, -200)
                         Spacer()
                         HStack{
                             Button(action: resetGame, label: {
@@ -113,15 +113,25 @@ struct Moves : View {
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
                                 
                             })
-                            NavigationLink(destination: HomeView()) {
+                            Button(action: {
+                                self.present.wrappedValue.dismiss()
+                            }, label: {
                                 Text("Home")
                                     .font(.system(size: 15))
                                     .foregroundColor(.white)
                                     .padding(.vertical, 12)
                                     .padding(.horizontal, 25)
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
-                                
-                            }
+                            })
+//                            NavigationLink(destination: HomeView()) {
+//                                Text("Home")
+//                                    .font(.system(size: 15))
+//                                    .foregroundColor(.white)
+//                                    .padding(.vertical, 12)
+//                                    .padding(.horizontal, 25)
+//                                    .background(Capsule().stroke(Color.white, lineWidth: 2))
+//                                
+//                            }
                         }
                         
                     }
@@ -159,12 +169,12 @@ struct Moves : View {
                                                         .font(.system(size: 13).bold())
                                                         .foregroundColor(Color.white)
                                                 ).onTapGesture {
-                                                   resetGame()
+                                                    resetGame()
                                                 }
                                             
-                                            NavigationLink {
-                                                HomeView()
-                                            } label: {
+                                            Button(action: {
+                                                self.present.wrappedValue.dismiss()
+                                            }, label: {
                                                 Rectangle()
                                                     .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
                                                     .cornerRadius(15)
@@ -177,13 +187,16 @@ struct Moves : View {
                                                     .navigationBarBackButtonHidden(true)
                                                     .statusBar(hidden: true)
                                             }
+                                            )
                                         }
                                         .padding(.top)
                                         
-                                    }).onAppear(){
+                                    }
+                                )
+                                .onAppear(){
                                         DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: 10, operation: "+", image: "")
                                     }
-                                .shadow(radius: 20)
+                               
                         } else if endGame == "O has won!"{
                             Rectangle()
                                 .fill(Color.white)

@@ -9,14 +9,18 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 struct ForgotPassword: View {
+    
+    //MARK: STATES
     @State var email = ""
     @State var showMessage = false
     @State var messageContent = String()
     @State var messageType = String()
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
+        
         NavigationView{
             
             ZStack{
@@ -24,6 +28,7 @@ struct ForgotPassword: View {
                 Image("background")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
+                
                 VStack{
                     Image("forgotPassword")
                         .resizable()
@@ -93,13 +98,9 @@ struct ForgotPassword: View {
                         })
                         Spacer()
                     }
-                
                 }
-                   
-                 
                 ,alignment: .top
             )
-            
             .alert(isPresented: $showMessage){
                 Alert(title:
                         Text("\(messageType)")
@@ -107,42 +108,38 @@ struct ForgotPassword: View {
                     .font(.system(.largeTitle)),
                       message: Text("\(messageContent)"),
                       dismissButton: .default(Text("Ok"),action: {
-                    if messageType != "Error"{
+                    if messageType != "⚠️ Error"{
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }))
                 
             }
         }
-        }
+    }
     
     func forgotPassowrd(email:String){
         if email == "" {
-            messageType = "Error"
+            messageType = "⚠️ Error"
             showMessage = true
-            messageContent = "Please fill all the contents "
+            messageContent = "Please fill in all the fields "
         } else {
             
             Auth.auth().sendPasswordReset(withEmail: email){ err in
                 
                 if err != nil {
-                    messageType = "Error"
+                    messageType = "⚠️ Error"
                     showMessage = true
                     messageContent = "\(err!.localizedDescription) "
                 } else{
-                    messageType = "Check Your email"
+                    messageType = "👍🏻 Success"
                     showMessage = true
-                    messageContent = "We have sent a link to rest the password"
+                    messageContent = "Please check your email, we have sent a link to reset the password"
                 }
             }
         }
-        
     }
-
-        
-    }
+}
     
-
 
 
 struct ForgotPassword_Previews: PreviewProvider {
