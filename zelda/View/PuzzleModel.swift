@@ -23,8 +23,6 @@ struct PuzzleModel {
             puzzles.append(Puzzle(id: index, content: content))
         }
         puzzles.shuffle()
-//        puzzleSign()
-        
     }
     
    mutating func selected(selectedPuzzle : Puzzle ){
@@ -32,7 +30,6 @@ struct PuzzleModel {
         if let puzzleSpaceLocation = puzzleSpace(id: 0){
             if let puzzleSelectedLocation = puzzleSpace(id: selectedPuzzle.id){
                 puzzles.swapAt(puzzleSpaceLocation, puzzleSelectedLocation)
-//                puzzleSign()
             }
         }
     }

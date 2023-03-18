@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct PuzzleView: View {
+    //MARK: - States
     @StateObject private var vm = ViewModel()
-    @ObservedObject var puzzelVM = PuzzleViewModel()
     @State private var gameOver = false
     @State var winState = false
     @State var loseState = false
+    
+    @Environment(\.presentationMode) var present
+    @ObservedObject var puzzelVM = PuzzleViewModel()
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
+    func checkGameState(){
+       if gameOver{
+           winState = true
+       } else if vm.isGameOver == true{
+           loseState = true
+       }
+   }
+    
     var body: some View {
         ZStack{
             ZStack(alignment: .bottomTrailing){
                 
                 VStack{
-                    
+                    //MARK: -  The View Header
                     HStack(alignment: .center){
                         Text(" Puzzle Game ")
                             .font(.system(size: 35))
@@ -31,169 +42,82 @@ struct PuzzleView: View {
                             .resizable()
                             .frame(width: 80, height: 80)
                     }
-                    .padding(10)
-                    .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-                    .cornerRadius(40)
-                    
-                    Rectangle()
-                        .fill(Color(red: 21/255, green: 50/255, blue: 89/255))
+                        .padding(10)
+                        .background(Color(red: 21/255, green: 50/255, blue: 89/255))
                         .cornerRadius(40)
-                        .overlay(
-                    Text("\(vm.time)")
-                        .foregroundColor(.white)
-                        .font(.system(size: 22))
-                    )
-                        .frame(width: 130, height: 50)
-                    
+                 
+                        Rectangle()
+                            .fill(Color(red: 21/255, green: 50/255, blue: 89/255))
+                            .cornerRadius(40)
+                            .overlay(
+                                Text("\(vm.time)")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 22))
+                            )
+                            .frame(width: 130, height: 50)
+                       
+                    //MARK: - The Game
                     LazyVGrid(columns : [GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80))]){
                         ForEach(puzzelVM.puzzles){ puzzle in
                             CartView(num: puzzle.content, id: puzzle.id)
                                 .cornerRadius(10)
-                            //                .background(puzzelVM.puzzleModel.currentState Color.green : Color.black)
-                            
                                 .onTapGesture{
                                     withAnimation{
                                         puzzelVM.selected(selectedPuzzle: puzzle)
                                         puzzelVM.puzzleModel.puzzleSign()
-                                        //                        print(" current state \(puzzelVM.puzzleModel.currentState)")
                                         gameOver = puzzelVM.puzzleModel.isGameOver
                                         
                                     }
                                 }
+                            }
+                        }
+                            .padding(30)
+                    //MARK: -  The View Bottom
+                    
+                    HStack{
+                        Button(action: {
+                            self.present.wrappedValue.dismiss()
+                        }, label: {
+                            Text("Home")
+                                .padding()
+                                .frame(width:150, height: 30 , alignment:.center)
+                                .background(Color.gray.opacity(0.4))
+                                .foregroundColor(Color.white)
+                                .monospaced()
+                                .cornerRadius(8)
+                        })
+                        Button{
+                            withAnimation{
+                                puzzelVM.newGame()
+                            }
+                            
+                        }label:{
+                            Text("Shuffle")
+                                .padding()
+                                .frame(width:150, height: 30 , alignment:.center)
+                                .background(Color.gray.opacity(0.4))
+                                .foregroundColor(Color.white)
+                                .monospaced()
+                                .cornerRadius(8)
                         }
                     }
-                    .padding(60)
+                   
                     
-                    newGameButton
                 }.frame(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height)
                     .background(Image("background") .resizable() .scaledToFill()
                         .edgesIgnoringSafeArea([.top , .bottom , .leading , .trailing]) )
-                
-                Image("1")
-                    .resizable()
-                    .frame(width: 120 , height: 180)
-                    .padding(.trailing , 20)
-                    .padding(.bottom , 20)
             }
             
             if vm.isGameOver || gameOver{
-                if self.winState {
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(width: 320, height: 300)
-                        .cornerRadius(20)
-                        .overlay(
-                            VStack(spacing: 10){
-                                Text("You Are Genius!")
-                                    .font(.largeTitle)
-                                    .foregroundColor(Color.black)
-                                //  .padding(.bottom,110)
-                                Image("winCharacter")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                HStack(spacing: 0){
-                                    Text("You got 20")
-                                        .foregroundColor(Color.black)
-                                    Image("red")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-                                }
-                                
-                                
-                                //edit score on firebase
-                                HStack(spacing: 20){
-                                    Rectangle()
-                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                        .cornerRadius(15)
-                                        .frame(width: 120, height: 48)
-                                        .overlay(
-                                            Text("New Game")
-                                                .font(.system(size: 13).bold())
-                                                .foregroundColor(Color.white)
-                                        ).onTapGesture {
-                                            AppState.shared.gameID = UUID()
-                                        }
-                                    
-                                    NavigationLink {
-                                        HomeView()
-                                    } label: {
-                                        Rectangle()
-                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                            .cornerRadius(15)
-                                            .frame(width: 120, height: 48)
-                                            .overlay(
-                                                Text("Home")
-                                                    .font(.system(size: 13).bold())
-                                                    .foregroundColor(Color.white)
-                                            )
-                                            .navigationBarBackButtonHidden(true)
-                                           // .navigationBarHidden(true)
-                                            .statusBar(hidden: true)
-                                    }
-                                    
-                                }
-                                .padding(.top)
-                                
-                                //add button to go back home
-                            }).onAppear(){
-                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: 20, operation: "+", image: "")
-                            }
-                        .shadow(radius: 20)
-                } else if self.loseState {
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(width: 320, height: 300)
-                        .cornerRadius(20)
-                        .overlay(
-                            VStack(spacing: 10){
-                                Text("Time Over")
-                                    .font(.largeTitle)
-                                    .foregroundColor(Color.black)
-                                //  .padding(.bottom,110)
-                                Image("1")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                
-                                Text("It's ok you can try again")
-                                    .foregroundColor(Color.black)
-                                //edit score on firebase
-                                HStack(spacing: 20){
-                                    Rectangle()
-                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                        .cornerRadius(15)
-                                        .frame(width: 120, height: 48)
-                                        .overlay(
-                                            Text("New Game")
-                                                .font(.system(size: 13).bold())
-                                                .foregroundColor(Color.white)
-                                        ).onTapGesture {
-                                            AppState.shared.gameID = UUID()
-                                        }
-                                    
-                                    
-                                            NavigationLink {
-                                                HomeView()
-                                            } label: {
-                                                Rectangle()
-                                                    .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                                    .cornerRadius(15)
-                                                    .frame(width: 120, height: 48)
-                                                    .overlay(
-                                                        Text("Home")
-                                                            .font(.system(size: 13).bold())
-                                                            .foregroundColor(Color.white)
-                                                    )
-                                                    .navigationBarBackButtonHidden(true)
-                                                    .statusBar(hidden: true)
-                                            }
-                                            
-                                }
-                                .padding(.top)
-                                
-                            })
-                        .shadow(radius: 20)
+                if self.winState{
+                    ZeldaAlert(isHeWins: true, coins: 20)
                 }
+                else if loseState {
+                    ZeldaAlert(isHeWins: false, coins: 0)
+                }
+
             }
+            
         }.onAppear(){
             vm.start(min: vm.minuts)
         }
@@ -201,32 +125,9 @@ struct PuzzleView: View {
             vm.updateCountdown()
             checkGameState()
         }
-    }
- func checkGameState(){
-    if gameOver{
-        winState = true
-    } else if vm.isGameOver == true{
-        loseState = true
-    }
-}
-    var newGameButton : some View {
-        Button{
-            withAnimation{
-                puzzelVM.newGame()
-            }
-           
-        }label:{
-        Text("Shuffle")
-        .padding()
-        .frame(width:150, height: 30 , alignment:.center)
-        .background(Color.gray.opacity(0.4))
-        .foregroundColor(Color.white)
-        .monospaced()
-        .cornerRadius(8)
-            }
-    }
-
-}
+       
+    } // end of body
+} // end of PuzzleView
 
 
 
@@ -248,38 +149,6 @@ struct CartView : View {
                 .padding()
             }
         } .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-    }
-}
-
-/*struct GameOverView : View{
-
-    @Binding var coinsCount : Int
-    var body: some View{
-        GeometryReader{
-            geometry in
-            ZStack{
-                Image("background")
-                    .resizable()
-                    .aspectRatio(geometry.size, contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
-
-                VStack(alignment:.center){
-                    Text("GameOver , 10 Coins added \n\n\nYour Coins now : \(coinsCount)")
-                        .padding(40)
-                        .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .monospaced()
-                }
-                .cornerRadius(40)
-            }
-        }
-    }
-}*/
-
-struct PuzzleView_Previews: PreviewProvider {
-    static var previews: some View {
-        PuzzleView()
     }
 }
 
@@ -326,5 +195,11 @@ extension PuzzleView{
             self.minuts = Float(minutes)
             self.time = String(format: "%d:%02d", minutes, seconds)
         }
+    }
+}
+
+struct PuzzleView_Previews: PreviewProvider {
+    static var previews: some View {
+        PuzzleView()
     }
 }

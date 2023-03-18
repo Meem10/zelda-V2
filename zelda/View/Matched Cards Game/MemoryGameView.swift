@@ -28,9 +28,9 @@ struct MemoryGameView: View {
     @State var userChoices = [GameCard]()
     @State var winState = false
     @State var loseState = false
-    
+    @State var goHome = false
     var body: some View {
-        NavigationView {
+       
             GeometryReader { geo in
                         ZStack{
                             Image("background")
@@ -114,8 +114,8 @@ struct MemoryGameView: View {
                                                             AppState.shared.gameID = UUID()
                                                         }
                                                     
-                                                    NavigationLink {
-                                                        HomeView()
+                                                    Button {
+                                                        goHome.toggle()
                                                     } label: {
                                                         Rectangle()
                                                             .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
@@ -126,9 +126,6 @@ struct MemoryGameView: View {
                                                                     .font(.system(size: 13).bold())
                                                                     .foregroundColor(Color.white)
                                                             )
-                                                            .navigationBarBackButtonHidden(true)
-                                                           // .navigationBarHidden(true)
-                                                            .statusBar(hidden: true)
                                                     }
                                                     
                                                 }
@@ -172,8 +169,8 @@ struct MemoryGameView: View {
                                                         }
                                                     
                                                     
-                                                            NavigationLink {
-                                                                HomeView()
+                                                            Button {
+                                                                goHome.toggle()
                                                             } label: {
                                                                 Rectangle()
                                                                     .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
@@ -184,9 +181,6 @@ struct MemoryGameView: View {
                                                                             .font(.system(size: 13).bold())
                                                                             .foregroundColor(Color.white)
                                                                     )
-                                                                    .navigationBarBackButtonHidden(true)
-                                                                   // .navigationBarHidden(true)
-                                                                    .statusBar(hidden: true)
                                                             }
                                                             
                                                 }
@@ -199,16 +193,16 @@ struct MemoryGameView: View {
                                 }
                             }
                         }
-            }.onAppear(){
-                vm.start(min: vm.minuts)
-            }
-            .onReceive(timer) { (_) in
-                vm.updateCountdown()
-                gameOver()
-            }
-        }
-        .statusBar(hidden: true)
-        .navigationBarBackButtonHidden(true)
+                    }.onAppear(){
+                        vm.start(min: vm.minuts)
+                            }
+                    .onReceive(timer) { (_) in
+                        vm.updateCountdown()
+                        gameOver()
+                        }
+                    .fullScreenCover(isPresented: $goHome) {
+                        HomeView()
+                    }
            }
     
     func gameOver(){

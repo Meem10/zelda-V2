@@ -15,12 +15,16 @@ struct HomeView: View {
     var body: some View {
         Home(userJewerly: $userJewerly,userName: $userName )
             .onAppear(){
-            fetchJewerly()
+                DispatchQueue.main.async {
+                    fetchJewerly()
+                }
+           
         }
     }
     
     func fetchJewerly(){
         DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user in
+            
             userJewerly = user.jewelry
             userName = user.name
             

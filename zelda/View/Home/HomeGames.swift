@@ -9,10 +9,12 @@ import Foundation
 import SwiftUI
 
 struct GameLabel : View {
+    
      var gameName : String
      var gameImage:String
     @StateObject var appState = AppState.shared
     @State var isPresendnt = false
+    
     var body: some View {
         HStack {
             HStack{
@@ -38,13 +40,24 @@ struct GameLabel : View {
                     Button(action: {
                         isPresendnt.toggle()
                     }, label: {
-                        Text("Play")
-                            .font(.caption)
-                            .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 25)
-                            .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        if gameName == "Ludo Star" || gameName == "Chess" {
+                            Image(systemName: "lock.fill")
+                                .resizable()
+                                .frame(width: 12,height: 12)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 25)
+                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        } else {
+                            Text("Play")
+                                .font(.caption)
+                                .foregroundColor(.white)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 25)
+                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        }
+                      
                     })
+                    .disabled((gameName == "Ludo Star" || gameName == "Chess") == true ? true : false)
                     .offset(x: -20, y: -50)
                     .fullScreenCover(isPresented: $isPresendnt, content: {
                         switch(gameName){

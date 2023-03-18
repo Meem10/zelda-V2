@@ -11,6 +11,8 @@ import Firebase
 import FirebaseDatabase
 
 struct AccountView: View {
+    
+    //MARK: - States
     @State var playerName = ""
     @State var playerEmail = ""
     @State var playerPassword = ""
@@ -20,7 +22,9 @@ struct AccountView: View {
     @State var playerCoins = ""
     @State var userID = "\(Auth.auth().currentUser!.uid)"
     @State var userInfo = [NSDictionary]()
+    @State var backHome = false
     @StateObject private var user = Users()
+    
     @Environment(\.presentationMode) var present
     
   
@@ -36,7 +40,7 @@ struct AccountView: View {
                 VStack{
                     Button(action : {
                         // pop the view when back button pressed
-                        self.present.wrappedValue.dismiss()
+                        backHome.toggle()
                     }) {
                         Image(systemName: "chevron.left")
                             .font(.title)
@@ -46,9 +50,10 @@ struct AccountView: View {
                         infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID,user: user.user)
                     }.padding()
                 }
-              
-                
             }
+        }
+        .fullScreenCover(isPresented: $backHome) {
+            HomeView()
         }
     }
     
@@ -57,13 +62,14 @@ struct AccountView: View {
 
 }
 
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountView()
-    }
-}
+//struct AccountView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AccountView()
+//    }
+//}
 
 struct infoView : View {
+    //MARK: - Bindings
     @Binding var playerName : String
     @Binding var playerEmail : String
     @Binding var playerPassword : String
@@ -71,7 +77,12 @@ struct infoView : View {
     @Binding var playerBirthDate : Date
     @Binding var playerCoins : String
     @Binding var userId : String
+    
+    //MARK: - States
     @State var  successLogout  = false
+    @State var showErrorMessage = false
+    @State var errorMessage = ""
+    //MARK: - Vars
     var user : User?
     var body: some View{
 
@@ -79,15 +90,14 @@ struct infoView : View {
             
             VStack(alignment: .leading){
             
-            HStack(alignment: .center){
-                Text("\(user?.name ?? "userName")")
-            .font(.system(size: 30))
-            //.fontDesign(.serif)
-            .foregroundColor(Color.white)
-            }
-            .padding(20)
-            .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-            .cornerRadius(40)
+                HStack(alignment: .center){
+                    Text("\(user?.name ?? "userName")")
+                        .font(.system(size: 30))
+                        .foregroundColor(Color.white)
+                }
+                    .padding(20)
+                    .background(Color(red: 21/255, green: 50/255, blue: 89/255))
+                    .cornerRadius(40)
             
 
                 HStack(alignment: .center){
@@ -97,91 +107,108 @@ struct infoView : View {
                         .font(.title)
                         .foregroundColor(.white)
                         .frame(width: 23, height: 23)
-                    Text("\(playerCoins) \(user?.jewelry ?? 0)")
-                    .foregroundColor(Color.white)
-                }.padding(20)
-
-            Spacer()
-            
-            VStack{
-                ZStack(alignment: .leading){
-                Image(systemName:"person")
-
-                    TextField("", text: $playerName , prompt: Text("\(user?.name ?? "")").foregroundColor(.white.opacity(0.6))) // if the  placeeholder displayes the last stored name in db will be 👍🏻
-                    .padding([.leading] , 30)
-                    .disabled(!isEditingeOn)
-                }.foregroundColor(.white)
-                
-                ZStack(alignment: .leading){
-                Image(systemName:"at")
-                TextField("", text: $playerEmail, prompt: Text("\(user?.email ?? "")").foregroundColor(.white.opacity(0.6)))
-                    .disabled(true)
-                    .padding([.leading] , 30)
-                }.foregroundColor(.white)
-                
-                ZStack(alignment: .leading){
-                Image(systemName:"staroflife.circle")
-                SecureField("", text: $playerPassword, prompt: Text("\(user?.password ?? "")").foregroundColor(.white.opacity(0.6)))
-                    .disabled(!isEditingeOn)
-                    .padding([.leading] , 30)
-                }.foregroundColor(.white)
-                
-                VStack(alignment: .leading){
-                    DatePicker(selection: $playerBirthDate, in: ...Date.now, displayedComponents: .date){
-                    Text("Select a date")
-                    }.disabled(!isEditingeOn)
-                    .colorInvert().colorMultiply(.white)
-                        
-                                    
-                    Text("Your Birth day:   \(playerBirthDate.formatted(date: .long, time: .omitted))")
-                    .foregroundColor(Color.white)
-                                    
                     
-                }.padding(.top , 30)
+                    Text("\(playerCoins) \(user?.jewelry ?? 0)")
+                        .foregroundColor(Color.white)
+                    
+                    }.padding()
 
-                Toggle("Activate Editing", isOn: $isEditingeOn)
-                .foregroundColor(Color.white)
-                .padding(.top , 30)
-                
-                
+                HStack{
+                    //MARK: -  Profile character
+                    
+                    Image("\(user?.profileImage ?? "1")")
+                        .resizable()
+                        .frame(width: 100 , height: 150)
+//                        .padding(.leading , 40)
+//                        .padding(.top , 120)
+                }
                
+           
+                VStack{
+            //MARK: -  User Name
+                    
+                    ZStack(alignment: .leading){
+                        Image(systemName:"person")
+
+                        TextField("", text: $playerName , prompt: Text("\(user?.name ?? "")").foregroundColor(.white.opacity(0.6)))
+                            .padding([.leading] , 30)
+                            .disabled(!isEditingeOn)
+                        
+                        }.foregroundColor(.white)
+                    
+            //MARK: -  User Email
+                    
+                    ZStack(alignment: .leading){
+                        Image(systemName:"at")
+                        TextField("", text: $playerEmail, prompt: Text("\(user?.email ?? "")").foregroundColor(.white.opacity(0.6)))
+                            .disabled(true)
+                            .padding([.leading] , 30)
+                        }.foregroundColor(.white)
+                    
+            //MARK: -  User Password
+                    if playerPassword != "" && isEditingeOn {
+                        ZStack(alignment: .leading){
+                            Image(systemName:"lock")
+                            SecureField("", text: $playerPassword, prompt: Text("\(user?.password ?? "")").foregroundColor(.white.opacity(0.6)))
+                                .disabled(!isEditingeOn)
+                                .padding([.leading] , 30)
+                        }.foregroundColor(.white)
+                    }
+                    
+                    if playerPassword != "" && !isEditingeOn {
+                        ZStack(alignment: .leading){
+                            Image(systemName:"lock")
+                            TextField("\(user?.password ?? "")",text: $playerPassword).foregroundColor(.white.opacity(0.6))
+                                .disabled(!isEditingeOn)
+                                .padding([.leading] , 30)
+                        }.foregroundColor(.white)
+                    }
+               
+                    Toggle("Activate Editing", isOn: $isEditingeOn)
+                        .foregroundColor(Color.white)
+                        .padding(.top , 30)
                 
+            //MARK: -  Update Button
                     Button {
                         update()
-                    } label: {
-                        Text("Save Edition")
-                            .frame(width:200, height: 30 , alignment:.center)
-                            .background(Color.gray.opacity(0.4))
-                            .foregroundColor(Color.white)
-                            .cornerRadius(8)
-                    }.disabled(playerName.isEmpty || playerPassword.isEmpty) // wrong opinion
+                        } label: {
+                            Text("Save Edition")
+                                .frame(width:200, height: 30 , alignment:.center)
+                                .background(Color.gray.opacity(0.4))
+                                .foregroundColor(Color.white)
+                                .cornerRadius(8)
+                        }
+                        .disabled(!isEditingeOn) // wrong opinion
                         .padding([.top] , 30)
                 
-                Button {
-                   logout()
-                } label: {
-                    Text("SignOut")
-                        .frame(width:200, height: 30 , alignment:.center)
-                        .background(Color.gray.opacity(0.4))
-                        .foregroundColor(Color.red)
-                        .cornerRadius(8)
-                } .fullScreenCover(isPresented: $successLogout) {
-                    ContentView()
+            //MARK: -  Update Button
+                    Button {
+                        logout()
+                        } label: {
+                            Text("SignOut")
+                                .frame(width:200, height: 30 , alignment:.center)
+                                .background(Color.gray.opacity(0.4))
+                                .foregroundColor(Color.red)
+                                .cornerRadius(8)
+                        } .fullScreenCover(isPresented: $successLogout) {
+                                ContentView()
+                            }
                 }
+                    .padding(30)
+                    .background(Color(red: 21/255, green: 50/255, blue: 89/255))
+                    .cornerRadius(40)
                 
-            }.padding(30)
-                .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-                .cornerRadius(40)
-                
-               
+                Spacer()
             }
-            
-            Image("\(user?.profileImage ?? "1")")
-                .resizable()
-                .frame(width: 100 , height: 150)
-                .padding(.leading , 40)
-                .padding(.top , 120)
-        
+        }
+        .alert(isPresented: $showErrorMessage){
+            Alert(title:
+                    Text("⚠️ Error")
+                        .foregroundColor(Color.red)
+                        .font(.system(.largeTitle)),
+                  message: Text("\(errorMessage)"),
+                  dismissButton: .default(Text("Ok")))
+
         }
     }
     
@@ -197,17 +224,30 @@ struct infoView : View {
     }
     
     func update(){
-        
-        
-        let currentUser = Auth.auth().currentUser
-            currentUser?.updatePassword(to: playerPassword)
-        
-        
-        let dbRef: DatabaseReference!
-        dbRef = Database.database().reference().child("Users").child("\(userId)")
-        
-        dbRef.updateChildValues(["fullName":playerName,"email":user!.email ,"password":playerPassword,"profileImage": user!.profileImage, "jewelry": user!.jewelry ])
-        
-        
+        if playerName == "" || playerPassword == "" {
+            errorMessage = "Please Fill in all the fileds!"
+            showErrorMessage.toggle()
+        } else {
+            let currentUser = Auth.auth().currentUser
+            currentUser?.updatePassword(to: playerPassword){err in
+                if  err == nil {
+                    
+                    let dbRef: DatabaseReference!
+                        dbRef = Database.database().reference().child("Users").child("\(userId)")
+                        dbRef.updateChildValues(["fullName":playerName,"email":user!.email ,"password":playerPassword,"profileImage": user!.profileImage, "jewelry": user!.jewelry ]){ err , resualt  in
+                        
+                                if err == nil {
+                                    isEditingeOn.toggle()
+                                } else {
+                                    showErrorMessage.toggle()
+                                    errorMessage = "\(err!.localizedDescription)"
+                        }
+                    }
+                } else {
+                    errorMessage = "\(err!.localizedDescription)"
+                    showErrorMessage.toggle()
+                }
+            }
+        }
     }
 }
