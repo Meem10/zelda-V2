@@ -20,7 +20,7 @@ struct snake: View {
     let snakeSize:CGFloat = 12
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
-    //MARK: - Vars
+    //MARK: - States 
     @State var startPos:CGPoint = .zero
     @State var isStarted = true
     @State var gameOver = false
@@ -28,7 +28,7 @@ struct snake: View {
     @State var posArray = [CGPoint(x: 0, y: 0)]
     @State var foodPos = CGPoint(x: 0, y: 0)
     
-
+    @Environment(\.presentationMode) var present
     //MARK: - View
     var body: some View {
         NavigationView {
@@ -61,67 +61,73 @@ struct snake: View {
                         .frame(width: snakeSize, height: snakeSize)
                         .position(foodPos)
                 }
-                if self.gameOver {
-                   Rectangle()
-                        .fill(Color.white)
-                        .frame(width: 300, height: 280)
-                        .cornerRadius(20)
-                        .overlay(
-                            VStack(spacing: 10){
-                                Text("Game Over")
-                                    .font(.largeTitle)
-                                    .foregroundColor(Color.black)
-                                //.padding(.bottom,110)
-                                Image("3")
-                                    .resizable()
-                                    .frame(width: 70, height: 100)
-                                HStack(spacing: 0){
-                                    Text("Score \(posArray.count-1)")
-                                        .foregroundColor(.black)
-                                    Image("red")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-                                }
-                                //edit score on firebase
-                                HStack(spacing: 20){
-                                    Rectangle()
-                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                        .cornerRadius(15)
-                                        .frame(width: 120, height: 48)
-                                        .overlay(
-                                            Text("New Game")
-                                                .font(.system(size: 13).bold())
-                                                .foregroundColor(Color.white)
-                                        ).onTapGesture {
-                                            
-                                            AppState.shared.gameID = UUID()
-                                        }
-                                    
-                                    NavigationLink {
-                                        HomeView()
-                                    } label: {
-                                        Rectangle()
-                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                            .cornerRadius(15)
-                                            .frame(width: 120, height: 48)
-                                            .overlay(
-                                                Text("Home")
-                                                    .font(.system(size: 13).bold())
-                                                    .foregroundColor(Color.white)
-                                            )
-                                    }
-                                }
-                                .padding(.top)
-                                
-                            }).onAppear(){
-                                //edit score
-                                let score: Int = posArray.count - 1
-                                
-                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: score,operation: "+", image: "")
-                            }
-                        .shadow(radius: 20)
-                  
+                
+                if self.gameOver{
+                    let score: Int = posArray.count - 1
+                    ZeldaAlert(isHeWins: true, coins: score)
+                    
                 }
+//                if self.gameOver {
+//                   Rectangle()
+//                        .fill(Color.white)
+//                        .frame(width: 300, height: 280)
+//                        .cornerRadius(20)
+//                        .overlay(
+//                            VStack(spacing: 10){
+//                                Text("Game Over")
+//                                    .font(.largeTitle)
+//                                    .foregroundColor(Color.black)
+//                                //.padding(.bottom,110)
+//                                Image("3")
+//                                    .resizable()
+//                                    .frame(width: 70, height: 100)
+//                                HStack(spacing: 0){
+//                                    Text("Score \(posArray.count-1)")
+//                                        .foregroundColor(.black)
+//                                    Image("red")
+//                                        .resizable()
+//                                        .frame(width: 25, height: 25)
+//                                }
+//                                //edit score on firebase
+//                                HStack(spacing: 20){
+//                                    Rectangle()
+//                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+//                                        .cornerRadius(15)
+//                                        .frame(width: 120, height: 48)
+//                                        .overlay(
+//                                            Text("New Game")
+//                                                .font(.system(size: 13).bold())
+//                                                .foregroundColor(Color.white)
+//                                        ).onTapGesture {
+//
+//                                            AppState.shared.gameID = UUID()
+//                                        }
+//
+//                                    Button {
+//                                        self.present.wrappedValue.dismiss()
+//                                    } label: {
+//                                        Rectangle()
+//                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+//                                            .cornerRadius(15)
+//                                            .frame(width: 120, height: 48)
+//                                            .overlay(
+//                                                Text("Home")
+//                                                    .font(.system(size: 13).bold())
+//                                                    .foregroundColor(Color.white)
+//                                            )
+//                                    }
+//                                }
+//                                .padding(.top)
+//
+//                            }).onAppear(){
+//                                //edit score
+//                                let score: Int = posArray.count - 1
+//
+//                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: score,operation: "+", image: "")
+//                            }
+//                        .shadow(radius: 20)
+//
+//                }
                 
             }.onAppear(){
                 self.foodPos = changeRecPosition()
@@ -160,8 +166,27 @@ struct snake: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
+//            .overlay (
+//                Button(action: {
+//                    self.present.wrappedValue.dismiss()
+//                }, label: {
+//                    HStack {
+//                        HStack{
+//                            Image(systemName: "chevron.backward")
+//                                .resizable()
+//                                .frame(width: 12,height: 12)
+//                                .foregroundColor(Color.white)
+//
+//                            Text("Back")
+//                                .foregroundColor(Color.white)
+//                        }
+//                        .padding(.leading,10)
+//                        Spacer()
+//                    }
+//                })
+//                ,alignment: .top
+//            )
             
-           // .navigationBarHidden(true)
         }
         .statusBar(hidden: true)
         .navigationBarBackButtonHidden(true)
