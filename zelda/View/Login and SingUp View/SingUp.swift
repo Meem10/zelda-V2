@@ -158,7 +158,7 @@ struct SignUP : View {
                 
                 let dbRef: DatabaseReference!
                     dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
-                    dbRef.setValue(["fullName":name,"email":email,"password":password,"profileImage":"1","jewelry":100])
+                dbRef.setValue(["fullName":name,"email":email,"password":password,"profileImage":"1","jewelry":100,"type":0])
                 
                 guard let userID = authrize?.user.uid else { return }
                 DBModel.curentUserID = userID

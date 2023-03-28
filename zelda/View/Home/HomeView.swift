@@ -23,10 +23,11 @@ struct HomeView: View {
     }
     
     func fetchJewerly(){
-        DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user in
-            
-            userJewerly = user.jewelry
-            userName = user.name
+        DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user,error  in
+            if !error  {
+                userJewerly = user!.jewelry
+                userName = user!.name
+            }
             
         }
     }

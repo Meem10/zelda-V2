@@ -133,17 +133,30 @@ struct Login_signupHomeView : View {
             if error != nil {
                 print("\(error!.localizedDescription)")
             } else {
-                
-                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: "1",jewelry:50)
+                DBModel().getUserInfo(id: authResult!.user.uid) { user,error  in
+                 
+                    // if the user is exist and want to login
                     
-                    var dbRef : DatabaseReference!
-                        dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
-                        dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage,"jewelry":user.jewelry])
-                
+                    if !error {
+                       
+                        var dbRef : DatabaseReference!
+                            dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
+                            dbRef.setValue(["fullName":user!.name,"email":user!.email,"profileImage":user!.profileImage,"jewelry":user!.jewelry,"type":user!.type,"password":""])
+                        
+                    } else {
+                        
+                        let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: "1",jewelry:50,type: 1)
+
+                            var dbRef : DatabaseReference!
+                                dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
+                                dbRef.setValue(["fullName":user.name,"email":user.email,"profileImage":user.profileImage,"jewelry":user.jewelry,"type":1,"password":user.password])
+                        
+                            }
+                        }
                     }
                 }//end Auth
             }// send sendData
-} // Login_signupHomeView()
+        } // Login_signupHomeView()
 
 
 // MARK: End the login by Google

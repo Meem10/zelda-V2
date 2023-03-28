@@ -8,8 +8,8 @@
 import SwiftUI
 import FirebaseCore
 import GoogleSignIn
-import FacebookCore
-import FBSDKCoreKit
+
+//import FBSDKCoreKit
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -17,10 +17,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
-      FBSDKCoreKit.ApplicationDelegate.shared.application(
-          application,
-          didFinishLaunchingWithOptions: launchOptions
-      )
+//      FBSDKCoreKit.ApplicationDelegate.shared.application(
+//          application,
+//          didFinishLaunchingWithOptions: launchOptions
+//      )
     return true
   }
     @available(iOS 9.0, *)
@@ -30,18 +30,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 options: [UIApplication.OpenURLOptionsKey : Any] = [:]
             ) -> Bool {
                 var flag:Bool = false
-                if ApplicationDelegate.shared.application(app,open: url,sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-                ){
-                   flag = ApplicationDelegate.shared.application(
-                        app,
-                        open: url,
-                        sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                        annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-                    )
+//                if ApplicationDelegate.shared.application(app,open: url,sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+//                ){
+//                   flag = ApplicationDelegate.shared.application(
+//                        app,
+//                        open: url,
+//                        sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+//                        annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+//                    )
                     
-                } else {
+//                } else {
                    flag = GIDSignIn.sharedInstance.handle(url)
-                }
+                //}
                 
                 return flag
             }

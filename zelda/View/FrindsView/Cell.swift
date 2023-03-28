@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct Cell: View {
-     
+    
     @State var user : User
     @State var conter :Int
+    
     var body: some View {
         
         HStack{
             Text("\(conter)")
                 .foregroundColor(Color.white)
-                
-            
             
             
             if conter == 1{
@@ -36,13 +35,12 @@ struct Cell: View {
                     .padding(10)
             }
             
-           
-            
+            // user Profile
             
             Image("\(user.profileImage)")
                 .resizable()
                 .frame(width: 40,height: 60)
-//                .clipShape(Circle())
+            
             
             ZStack{
                 HStack(){
@@ -50,9 +48,9 @@ struct Cell: View {
                         .foregroundColor(Color.white)
                         .font(.system(size: 15)).bold()
                     Spacer()
-                   
-                    HStack{
                     
+                    HStack{
+                        
                         Image("red")
                             .resizable()
                             .font(.title)
@@ -61,20 +59,11 @@ struct Cell: View {
                         
                         Text("\(user.jewelry)")
                             .font(.system(size: 12))
+                        
+                        
                     }
-                    
-                        
-                       
-                          
-                       
-                            
-                        
-                  
                 }
             }
         }
-        
-        
     }
 }
-

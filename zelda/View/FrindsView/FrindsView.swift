@@ -31,16 +31,16 @@ struct FrindsView: View {
                                     .foregroundColor(.white)
                             }
                             Spacer()
-                            
+
                             Text("Zelda Player")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                            
+
                             Spacer()
                         }.padding()
-                        
-                } .background(.thinMaterial)
+                }
+                    //MARK: - List of the frinds
                     
                     List{
                         
@@ -51,17 +51,15 @@ struct FrindsView: View {
                             }
                             
                         }.listRowBackground(Color.clear)
-                    }.background(.clear)
-                        .scrollContentBackground(.hidden)
-                    
+                    }
+                    .background(.clear)
+                    .scrollContentBackground(.hidden)
                 }
-               
-                
             }
-           
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+      
     }
 }
 
