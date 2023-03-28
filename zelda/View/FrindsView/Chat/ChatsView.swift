@@ -13,22 +13,28 @@ import FirebaseFirestore
 
 struct ChatsView: View {
   
+    //MARK: - States
+    
     @State var resUser : User
     @State var text = ""
     @State var isFocused = true
-    @StateObject var messagesManger : Messages
     @State var showTime = false
+    @StateObject var messagesManger : Messages
     
-   
-   
+    
    
     var body: some View {
         
-      
         VStack(spacing:0){
             
                 VStack{
+                    
+                    //MARK: - Header of the View
+                    
                     Title(user:resUser)
+                    
+                    // MARK: - Chat araea
+                    
                         ScrollViewReader { proxy in
                             ScrollView{
                                 getMessageView()
@@ -36,7 +42,6 @@ struct ChatsView: View {
                                         withAnimation {
                                             proxy.scrollTo(id,anchor: .bottom)
                                         }
-                                        
                                     }
                             }
                         }

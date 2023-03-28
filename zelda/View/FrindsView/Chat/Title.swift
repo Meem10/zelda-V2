@@ -9,10 +9,9 @@ import SwiftUI
 
 struct Title: View {
     
-    var imageUrl = URL(string: "https://www.w3schools.com/howto/img_avatar.png")
-   
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var user: User
+    
     var body: some View {
         HStack(spacing:20){
             
@@ -20,22 +19,16 @@ struct Title: View {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }){
-                    Image("back")
+                    Image(systemName:"chevron.left")
                         .frame(width:30,height:30)
+                        .foregroundColor(Color.white)
                 }
             }
-//            AsyncImage(url: imageUrl) { image in
-//                image.resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width:40,height: 40)
-//                    .cornerRadius(50)
-//            } placeholder: {
-//                ProgressView()
-//            }
+
             VStack {
                 Image("\(user.profileImage)")
                     .resizable()
-                    .frame(width: 60 , height: 60)
+                    .frame(width: 50 , height: 50)
                     .padding(.leading , 40)
             }
             
@@ -43,12 +36,11 @@ struct Title: View {
                 Text(user.name)
                     .font(.system(size: 20,design: .rounded))
                 
-                    
             }.frame(maxWidth:.infinity,alignment: .leading)
             
 
         }.padding()
-            .background(.thinMaterial)
+            
     }
 }
 

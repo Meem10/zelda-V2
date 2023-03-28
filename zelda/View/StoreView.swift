@@ -21,8 +21,10 @@ struct StoreView: View {
         
     }
     func fetchJewerly(){
-        DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user in
-            userJewerly = user.jewelry
+        DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user,error  in
+            if !error {
+                userJewerly = user!.jewelry
+            }
         }
     }
     

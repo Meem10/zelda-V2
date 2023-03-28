@@ -16,17 +16,12 @@ struct AccountView: View {
     @State var playerName = ""
     @State var playerEmail = ""
     @State var playerPassword = ""
-    @State var password = ""
+    @State var playCharacter = ""
+    @State var playerCoins = 0
+    @State var playerType = 0
     @State var editingToggle = false
-    @State var playerBirthDate = Date.now
-    @State var playerCoins = ""
     @State var userID = "\(Auth.auth().currentUser!.uid)"
-    @State var userInfo = [NSDictionary]()
     @State var backHome = false
-    @StateObject private var user = Users()
-    
-    @Environment(\.presentationMode) var present
-    
   
     var body: some View {
         
@@ -47,7 +42,7 @@ struct AccountView: View {
                             .foregroundColor(.white)
                     } .padding(.horizontal, -180)
                     VStack {
-                        infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID,user: user.user)
+                        infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , playCharacter: $playCharacter, playerCoins: $playerCoins, playerType: $playerType, isEditingeOn:$editingToggle ,userId:$userID)
                     }.padding()
                 }
             }
@@ -55,7 +50,19 @@ struct AccountView: View {
         .fullScreenCover(isPresented: $backHome) {
             HomeView()
         }
+        .onAppear(){
+            DBModel().getUserInfo(id: userID) { user,error in
+                if !error {
+                    playerName = user!.name
+                    playerPassword = user!.password
+                    playerCoins = user!.jewelry
+                    playerEmail = user!.email
+                    playCharacter = user!.profileImage
+                }
+            }
+        }
     }
+        
     
      
      
@@ -73,17 +80,19 @@ struct infoView : View {
     @Binding var playerName : String
     @Binding var playerEmail : String
     @Binding var playerPassword : String
+    @Binding var playCharacter : String
+    @Binding var playerCoins : Int
+    @Binding var playerType : Int
     @Binding var isEditingeOn : Bool
-    @Binding var playerBirthDate : Date
-    @Binding var playerCoins : String
     @Binding var userId : String
+
     
     //MARK: - States
     @State var  successLogout  = false
     @State var showErrorMessage = false
     @State var errorMessage = ""
+    
     //MARK: - Vars
-    var user : User?
     var body: some View{
 
         ZStack(alignment: .topLeading){
@@ -91,7 +100,8 @@ struct infoView : View {
             VStack(alignment: .leading){
             
                 HStack(alignment: .center){
-                    Text("\(user?.name ?? "userName")")
+//                    Text("\(user?.name ?? "userName")")
+                    Text(playerName)
                         .font(.system(size: 30))
                         .foregroundColor(Color.white)
                 }
@@ -108,7 +118,8 @@ struct infoView : View {
                         .foregroundColor(.white)
                         .frame(width: 23, height: 23)
                     
-                    Text("\(playerCoins) \(user?.jewelry ?? 0)")
+//                    Text("\(playerCoins) \(user?.jewelry ?? 0)")
+                    Text("\(playerCoins)")
                         .foregroundColor(Color.white)
                     
                     }.padding()
@@ -116,7 +127,8 @@ struct infoView : View {
                 HStack{
                     //MARK: -  Profile character
                     
-                    Image("\(user?.profileImage ?? "1")")
+//                    Image("\(user?.profileImage ?? "1")")
+                    Image(playCharacter)
                         .resizable()
                         .frame(width: 100 , height: 150)
 //                        .padding(.leading , 40)
@@ -130,7 +142,8 @@ struct infoView : View {
                     ZStack(alignment: .leading){
                         Image(systemName:"person")
 
-                        TextField("", text: $playerName , prompt: Text("\(user?.name ?? "")").foregroundColor(.white.opacity(0.6)))
+                       //TextField("", text: $playerName , prompt: Text("\(user?.name ?? "")").foregroundColor(.white.opacity(0.6)))
+                        TextField("", text: $playerName , prompt: Text(playerName).foregroundColor(.white.opacity(0.6)))
                             .padding([.leading] , 30)
                             .disabled(!isEditingeOn)
                         
@@ -140,25 +153,28 @@ struct infoView : View {
                     
                     ZStack(alignment: .leading){
                         Image(systemName:"at")
-                        TextField("", text: $playerEmail, prompt: Text("\(user?.email ?? "")").foregroundColor(.white.opacity(0.6)))
+                      //  TextField("", text: $playerEmail, prompt: Text("\(user?.email ?? "")").foregroundColor(.white.opacity(0.6)))
+                        TextField("", text: $playerEmail, prompt: Text(playerEmail).foregroundColor(.white.opacity(0.6)))
                             .disabled(true)
                             .padding([.leading] , 30)
                         }.foregroundColor(.white)
                     
             //MARK: -  User Password
-                    if playerPassword != "" && isEditingeOn {
+                    if playerType != 0 && isEditingeOn {
                         ZStack(alignment: .leading){
                             Image(systemName:"lock")
-                            SecureField("", text: $playerPassword, prompt: Text("\(user?.password ?? "")").foregroundColor(.white.opacity(0.6)))
+//                            SecureField("", text: $playerPassword, prompt: Text("\(user?.password ?? "")").foregroundColor(.white.opacity(0.6)))
+                            SecureField("", text: $playerPassword, prompt: Text(playerPassword).foregroundColor(.white.opacity(0.6)))
                                 .disabled(!isEditingeOn)
                                 .padding([.leading] , 30)
                         }.foregroundColor(.white)
                     }
                     
-                    if playerPassword != "" && !isEditingeOn {
+                    if playerType != 0 && !isEditingeOn {
                         ZStack(alignment: .leading){
                             Image(systemName:"lock")
-                            TextField("\(user?.password ?? "")",text: $playerPassword).foregroundColor(.white.opacity(0.6))
+//                            TextField("\(user?.password ?? "")",text: $playerPassword).foregroundColor(.white.opacity(0.6))
+                            TextField("",text: $playerPassword).foregroundColor(.white.opacity(0.6))
                                 .disabled(!isEditingeOn)
                                 .padding([.leading] , 30)
                         }.foregroundColor(.white)
@@ -224,7 +240,11 @@ struct infoView : View {
     }
     
     func update(){
-        if playerName == "" || playerPassword == "" {
+       
+        if playerType == 0 && playerName == "" || playerPassword == "" {
+            errorMessage = "Please Fill in all the fileds!"
+            showErrorMessage.toggle()
+        } else if playerType == 1 && playerName == ""  {
             errorMessage = "Please Fill in all the fileds!"
             showErrorMessage.toggle()
         } else {
@@ -234,7 +254,7 @@ struct infoView : View {
                     
                     let dbRef: DatabaseReference!
                         dbRef = Database.database().reference().child("Users").child("\(userId)")
-                        dbRef.updateChildValues(["fullName":playerName,"email":user!.email ,"password":playerPassword,"profileImage": user!.profileImage, "jewelry": user!.jewelry ]){ err , resualt  in
+                    dbRef.updateChildValues(["fullName":playerName ,"password":playerPassword ]){ err , resualt  in
                         
                                 if err == nil {
                                     isEditingeOn.toggle()
