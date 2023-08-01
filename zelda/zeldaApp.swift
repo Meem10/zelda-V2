@@ -44,10 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 //}
                 
                 return flag
-            }
-    
-    
-
+    }
 }
 
 @main
