@@ -59,7 +59,6 @@ struct PuzzleModel {
             }
         }
     
-    
     struct Puzzle : Identifiable {
         var id : Int
         let content : String
