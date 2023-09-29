@@ -12,7 +12,8 @@ struct ZeldaAlert: View {
     @State var isHeWins:Bool
     @State var coins:Int
     @State var goToHome = false
-    
+
+  
     var body: some View {
         VStack{
             
